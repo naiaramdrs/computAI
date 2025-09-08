@@ -14,12 +14,19 @@ class MyApp extends StatelessWidget {
   }
 }
 
-class MainPage extends StatelessWidget {
-  const MainPage({super.key}); 
+class MainPage extends StatefulWidget {
+  const MainPage({super.key});
 
+  @override
+  State<MainPage> createState() => _MainPageState();
+}
+
+class _MainPageState extends State<MainPage> {
   static final ThemeData theme = ThemeData(
     primarySwatch: Colors.indigo,
   );
+
+  String? _submittedText;
 
   @override
   Widget build(BuildContext context) {
@@ -29,24 +36,50 @@ class MainPage extends StatelessWidget {
 
     return Scaffold(
       backgroundColor: theme.colorScheme.secondary,
-      body: Center(
-        child: Text(
-          'Sua assistente virtual de\nComputação@UFCG',
-          style: style,
-          textAlign: TextAlign.center,
-        ),
-      ),
+      body: _submittedText == null
+          ? Center(
+              child: Text(
+                'Sua assistente virtual de\nComputação@UFCG',
+                style: style,
+                textAlign: TextAlign.center,
+              ),
+            )
+          : Padding(
+              padding: const EdgeInsets.only(top: 32.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 24),
+                    child: Text(
+                      _submittedText!,
+                      style: style,
+                      textAlign: TextAlign.justify,
+                    ),
+                  ),
+                ],
+              ),
+            ),
       bottomNavigationBar: Padding(
         padding: const EdgeInsets.all(8.0),
-        child: InputField(),
+        child: InputField(
+          onSend: (value) {
+            setState(() {
+              _submittedText = value.isEmpty ? null : value;
+            });
+          },
+        ),
       ),
     );
   }
 }
 
 class InputField extends StatefulWidget {
+  final ValueChanged<String> onSend;
+
   const InputField({
     super.key,
+    required this.onSend,
   });
 
   @override
@@ -63,11 +96,17 @@ class _InputFieldState extends State<InputField> {
       decoration: InputDecoration(
         filled: true,
         fillColor: Colors.white,
-        border: OutlineInputBorder(),
+        border: const OutlineInputBorder(),
         hintText: 'Digite sua dúvida aqui',
         suffixIcon: SendButton(
           onSend: () {
-            print(_controller.text);
+            final text = _controller.text.trim();
+            if (text.isEmpty) {
+              widget.onSend(''); 
+            } else {
+              widget.onSend(text);
+              _controller.clear();
+            }
           },
         ),
         enabledBorder: OutlineInputBorder(
