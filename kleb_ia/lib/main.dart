@@ -13,7 +13,6 @@ class MyApp extends StatelessWidget {
     );
   }
 }
-
 class MainPage extends StatefulWidget {
   const MainPage({super.key});
 
@@ -22,8 +21,9 @@ class MainPage extends StatefulWidget {
 }
 
 class _MainPageState extends State<MainPage> {
+  
   static final ThemeData theme = ThemeData(
-    primarySwatch: Colors.indigo,
+    primaryColor: Colors.blue.shade50,
   );
 
   String? _submittedText;
@@ -31,23 +31,29 @@ class _MainPageState extends State<MainPage> {
   @override
   Widget build(BuildContext context) {
     final style = theme.textTheme.titleSmall!.copyWith(
-      color: theme.colorScheme.onSecondary,
+      color: Colors.grey.shade900,
     );
 
     return Scaffold(
-      backgroundColor: theme.colorScheme.secondary,
+      backgroundColor: theme.primaryColor,
       body: _submittedText == null
           ? Center(
-              child: Text(
-                'Sua assistente virtual de\nComputação@UFCG',
-                style: style,
-                textAlign: TextAlign.center,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Image.asset('images/logo_sem_fundo.png', width: 200, height: 200),
+                  Text(
+                    'Sua assistente virtual de\nComputação@UFCG',
+                    style: style,
+                    textAlign: TextAlign.center,
+                  ),
+                ],
               ),
             )
           : Padding(
               padding: const EdgeInsets.only(top: 32.0),
               child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.end,
                 children: [
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 24),
@@ -91,27 +97,35 @@ class _InputFieldState extends State<InputField> {
 
   @override
   Widget build(BuildContext context) {
-    return TextField(
-      controller: _controller,
-      decoration: InputDecoration(
-        filled: true,
-        fillColor: Colors.white,
-        border: const OutlineInputBorder(),
-        hintText: 'Digite sua dúvida aqui',
-        suffixIcon: SendButton(
-          onSend: () {
-            final text = _controller.text.trim();
-            if (text.isEmpty) {
-              widget.onSend(''); 
-            } else {
-              widget.onSend(text);
-              _controller.clear();
-            }
-          },
-        ),
-        enabledBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(10.0),
-          borderSide: BorderSide(color: Colors.grey.shade300),
+    return Padding(
+      padding: const EdgeInsets.only(left: 4.0, right: 4.0, bottom: 14.0),
+      child: TextField(
+        controller: _controller,
+        decoration: InputDecoration(
+          filled: true,
+          fillColor: Colors.white,
+          border: const OutlineInputBorder(),
+          hintText: 'Digite sua dúvida aqui',
+          contentPadding: const EdgeInsets.symmetric(vertical: 18.0, horizontal: 16.0),
+          suffixIcon: SendButton(
+            onSend: () {
+              final text = _controller.text.trim();
+              if (text.isEmpty) {
+                widget.onSend(''); 
+              } else {
+                widget.onSend(text);
+                _controller.clear();
+              }
+            },
+          ),
+          focusedBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(15.0),
+            borderSide: BorderSide(color: Colors.grey.shade400),
+          ),
+          enabledBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(15.0),
+            borderSide: BorderSide(color: Colors.grey.shade400),
+          ),
         ),
       ),
     );
@@ -127,7 +141,7 @@ class SendButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return IconButton(
       icon: const Icon(Icons.arrow_circle_up),
-      color: Colors.indigo,
+      color:Colors.grey.shade500,
       onPressed: onSend,
     );
   }
