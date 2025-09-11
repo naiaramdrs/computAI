@@ -1,0 +1,1 @@
+pandas langchain langchain_community chromadb sentence_transformers langchain_huggingface
