@@ -6,10 +6,10 @@ import os
 
 os.environ["HUGGINGFACEHUB_API_TOKEN"] = os.getenv("HUGGINGFACE_API_KEY")
 
-data_sites = pd.read_csv('./csv/data_site.csv')
-data_pdf = pd.read_csv('./csv/data_pdf.csv')
+data_sites = pd.read_csv('./data/csv/data_site.csv')
+data_pdf = pd.read_csv('.data./csv/data_pdf.csv')
   
-client = chromadb.PersistentClient(path="./chroma_db")
+client = chromadb.PersistentClient(path="./data/chroma_db")
 
 embeddings = HuggingFaceEmbeddings(model_name="sentence-transformers/all-MiniLM-L6-v2")
 
