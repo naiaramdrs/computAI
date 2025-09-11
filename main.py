@@ -1,12 +1,11 @@
 from utils.utils import get_client, get_collection, get_embeddings_model
 from utils.preprocess import string_transform, create_chunks
 from utils.vector_db import add_vector_database
+from utils.chat import create_chat_conversation
 from dotenv import load_dotenv
 import pandas as pd
-import os
 
 load_dotenv()
-os.environ["HUGGINGFACEHUB_API_TOKEN"] = os.getenv("HUGGINGFACE_API_KEY")
 
 data_sites = pd.read_csv('./data/csv/data_site.csv')
 data_pdf = pd.read_csv('./data/csv/data_pdf.csv')
@@ -20,5 +19,5 @@ embeddings = get_embeddings_model()
 # chunks = create_chunks(text)
 # add_vector_database(chunks, embeddings, collection)
 
-
+print(create_chat_conversation(collection, "Como é o curso de computacao?"))
 
