@@ -1,3 +1,4 @@
+import 'package:flutter_chat_bubble/chat_bubble.dart';
 import 'package:flutter/material.dart';
 
 void main() => runApp(const MyApp());
@@ -9,6 +10,15 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'KlebIA',
+      theme: ThemeData(
+        textTheme: const TextTheme(
+          titleSmall: TextStyle(
+            color: Color(0xFF212121),
+            fontSize: 16,
+          )
+        ),
+        scaffoldBackgroundColor: Colors.blue.shade50,
+      ),
       home: const MainPage(),
     );
   }
@@ -22,61 +32,154 @@ class MainPage extends StatefulWidget {
 
 class _MainPageState extends State<MainPage> {
   
-  static final ThemeData theme = ThemeData(
-    primaryColor: Colors.blue.shade50,
-  );
-
-  String? _submittedText;
-
   @override
   Widget build(BuildContext context) {
-    final style = theme.textTheme.titleSmall!.copyWith(
-      color: Colors.grey.shade900,
-    );
 
     return Scaffold(
-      backgroundColor: theme.primaryColor,
-      body: _submittedText == null
-          ? Center(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Image.asset('images/logo_sem_fundo.png', width: 200, height: 200),
-                  Text(
-                    'Sua assistente virtual de\nComputação@UFCG',
-                    style: style,
-                    textAlign: TextAlign.center,
-                  ),
-                ],
-              ),
-            )
-          : Padding(
-              padding: const EdgeInsets.only(top: 32.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.end,
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 24),
-                    child: Text(
-                      _submittedText!,
-                      style: style,
-                      textAlign: TextAlign.justify,
-                    ),
-                  ),
-                ],
-              ),
-            ),
+      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+      body: WelcomePage(),
       bottomNavigationBar: Padding(
         padding: const EdgeInsets.all(8.0),
         child: InputField(
           onSend: (value) {
             setState(() {
-              _submittedText = value.isEmpty ? null : value;
+              value;
             });
+            Navigator.of(context).push(
+              MaterialPageRoute(
+                builder: (context) => ChatPage(
+                  submittedText: value,
+                ),
+              ),
+            );
           },
         ),
       ),
     );
+  }
+}
+
+class ChatPage extends StatelessWidget {
+  const ChatPage({
+    super.key,
+    required String? submittedText,
+  }) : _submittedText = submittedText;
+
+  final String? _submittedText;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      color: Theme.of(context).scaffoldBackgroundColor,
+      child: Column(
+        children: [
+            AppBar(
+            backgroundColor: const Color.fromARGB(255, 109, 160, 238),
+            leading: Image.asset('images/logo_sem_fundo.png'),
+            actions: [
+              IconButton(
+                icon: const Icon(Icons.home, color: Colors.white),
+                onPressed: () {
+                  Navigator.of(context).pushReplacement(
+                    MaterialPageRoute(
+                      builder: (context) => const MainPage(),
+                    ),
+                );
+                },
+              )
+            ],
+          ),
+          Align(
+            alignment: Alignment.centerRight,
+            child: Padding(
+              padding: const EdgeInsets.only(right: 24.0, top: 24.0),
+              child: 
+                ChatBubble(
+                  clipper: ChatBubbleClipper5(type: BubbleType.sendBubble),
+                  alignment: Alignment.topRight,
+                  margin: EdgeInsets.only(top: 20),
+                  backGroundColor: Colors.black,
+                  child: Container(
+                    constraints: BoxConstraints(
+                      maxWidth: MediaQuery.of(context).size.width * 0.7,
+                    ),
+                    child: Text(
+                      _submittedText!,
+                      style: TextStyle(color: Colors.white, fontSize: 16, decoration: TextDecoration.none, fontWeight: FontWeight.normal ),
+                    ),
+                  ),
+                ),
+            ),
+          ),
+            if (_submittedText.isNotEmpty) ...[
+            FutureBuilder(
+              future: Future.delayed(const Duration(seconds: 2)),
+              builder: (context, snapshot) {
+              if (snapshot.connectionState != ConnectionState.done) {
+                return const Padding(
+                padding: EdgeInsets.only(left: 24.0, top: 24.0),
+                child: Align(
+                  alignment: Alignment.centerLeft,
+                  child: SizedBox(width: 16, height: 16, child: CircularProgressIndicator(color: Colors.grey, strokeWidth: 2, )),
+                ),
+                );
+              }
+              return Align(
+                alignment: Alignment.centerLeft,
+                child: Padding(
+                padding: const EdgeInsets.only(left: 24.0, top: 24.0),
+                child: ChatBubble(
+                  clipper: ChatBubbleClipper5(type: BubbleType.receiverBubble),
+                  backGroundColor: Colors.white,
+                  margin: const EdgeInsets.only(top: 20),
+                  child: Container(
+                  constraints: BoxConstraints(
+                    maxWidth: MediaQuery.of(context).size.width * 0.7,
+                  ),
+                  child: const Text(
+                    'Resposta da KlebIA',
+                    style: TextStyle(
+                    color: Colors.black,
+                    fontSize: 16,
+                    decoration: TextDecoration.none,
+                    fontWeight: FontWeight.normal,
+                    ),
+                  ),
+                  ),
+                ),
+                ),
+              );
+              },
+            ),
+          ]
+        ],
+      ),
+    );
+  }
+}
+
+class WelcomePage extends StatelessWidget {
+  const WelcomePage({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    final style = Theme.of(context).textTheme.titleSmall!;
+    return Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Image.asset('images/logo_sem_fundo.png', width: 200, height: 200),
+            Text(
+              'Sua assistente virtual de\nComputação@UFCG',
+              style: style,
+              textAlign: TextAlign.center,
+            ),
+          ],
+        ),
+      );
+      
   }
 }
 
@@ -110,9 +213,7 @@ class _InputFieldState extends State<InputField> {
           suffixIcon: SendButton(
             onSend: () {
               final text = _controller.text.trim();
-              if (text.isEmpty) {
-                widget.onSend(''); 
-              } else {
+              if (text.isNotEmpty) {
                 widget.onSend(text);
                 _controller.clear();
               }
