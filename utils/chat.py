@@ -1,4 +1,5 @@
 import google.generativeai as genai
+from langchain_core.prompts import ChatPromptTemplate
 from dotenv import load_dotenv
 import os 
 
@@ -9,15 +10,26 @@ def get_model():
     model = genai.GenerativeModel('gemini-1.5-flash')
     return model 
 
-def create_chat(user_question):
-    model = get_model()
-
-    prompt = f"Você é uma assistente virtual que atente aos usuários de ciência da computação. Seu objetivo é responder a pergunta do usuário de forma clara e educada. Um usuário fez a seguinte pergunta: {user_question}"
+def create_chat(user_question, retriever):
+    template = """
+    Você é uma assistente virtual que atende aos usuários de Ciência da Computação. 
+    Você tem acesso às seguintes informações do curso da UFCG:
+    {info_docs}
     
-    response = model.generate_content(
-        prompt,
-        generation_config={
-            'max_output_tokens': 400
-        }
-    )
-    return response.text
+    Um estudante fez a seguinte pergunta:
+    {user_question}
+    
+    Responda de forma clara, concisa e informativa.
+    """
+
+    info_docs = retriever.invoke(user_question)
+    info_text = "\n\n".join([doc.page_content for doc in info_docs])
+    
+    model = get_model()
+    
+    prompt_text = template.format(info_docs=info_text, user_question=user_question)
+    
+    response = model.generate_content(prompt_text)
+    
+    return response.text  
+

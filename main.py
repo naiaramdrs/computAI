@@ -16,12 +16,12 @@ client = get_client()
 collection = get_collection(client)
 embeddings = get_embeddings_model()
 vector_store = get_vector_store(embeddings)
-
+retriever = get_retriever(vector_store)
 ## Essa parte vamos rodar apenas uma vez, no momento de adicionar os dados no vector database
 # if not os.path.exists("./data/chroma_db"):
 #     text = string_transform(data_sites) + string_transform(data_pdf)
 #     documents, ids = create_chunks(text)
 #     add_vector_database(documents, ids, vector_store)
 
-print(create_chat("Como é o curso de computacao?"))
+print(create_chat("Como é o curso de computacao?", retriever))
 
