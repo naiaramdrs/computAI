@@ -6,10 +6,9 @@ def string_transform(data):
     for _, row in data.iterrows():
         s = "[" + row["Título"] + "] - " + row["Conteúdo"] + " || "
         text += s
-    return text 
+    return text
 
-def create_chunks(text):
-    
+def create_chunks(text):  
     text_splitter = RecursiveCharacterTextSplitter(
         separators=["\n\n", "\n", " ", ""], ## Aqui teremos onde o nosso texto vai ser separado
         chunk_size = 800, ## Quantidade de caracteres que o nosso chunk vai ter 

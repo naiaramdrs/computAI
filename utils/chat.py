@@ -1,9 +1,7 @@
 import google.generativeai as genai
 from langchain_core.prompts import ChatPromptTemplate
 from dotenv import load_dotenv
-import os 
-
-load_dotenv()
+import os
 
 def get_model():
     genai.configure(api_key=os.getenv("API_KEY_GEMINI"))
@@ -12,7 +10,7 @@ def get_model():
 
 def create_chat(user_question, retriever):
     template = """
-    Você é uma assistente virtual que atende aos usuários de Ciência da Computação. 
+    Você é uma assistente virtual que atende os usuários de Ciência da Computação. 
     Você tem acesso às seguintes informações do curso da UFCG:
     {info_docs}
     
@@ -31,5 +29,4 @@ def create_chat(user_question, retriever):
     
     response = model.generate_content(prompt_text)
     
-    return response.text  
-
+    return response.text
