@@ -2,7 +2,7 @@ from langchain_chroma import Chroma
 
 def get_vector_store(embeddings):
     vector_store = Chroma(
-        collection_name="my-collection",
+        collection_name="klebia",
         embedding_function=embeddings,
         persist_directory="./data/chroma_db"
     )
