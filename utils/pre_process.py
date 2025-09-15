@@ -26,10 +26,10 @@ def create_propositions(chunks):
         print(f"CHUNK: {chunk}")
 
         prompt = template.format(chunk=chunk)
-        response = model.text_generation(prompt)
-        propositions.append(response)
+        response = model.generate_content(prompt)
+        propositions.append(response.text)
         
-        print(f"PROPOSITION: {response}")
+        print(f"PROPOSITION: {response.text}")
 
     return propositions
 
