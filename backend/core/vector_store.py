@@ -15,7 +15,7 @@ def get_retriever(vector_store):
     )
     return retriever
 
-def add_vector_database(documents, ids, vector_store):
+def add_documents(documents, ids, vector_store):
     try:         
         vector_store.add_documents(
             ids=ids,

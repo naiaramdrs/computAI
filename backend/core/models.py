@@ -1,6 +1,6 @@
-from langchain_huggingface import HuggingFaceEmbeddings
-import google.generativeai as genai
 import os
+import google.generativeai as genai
+from langchain_huggingface import HuggingFaceEmbeddings
 
 def get_model():
     genai.configure(api_key=os.getenv("API_KEY_GEMINI"))

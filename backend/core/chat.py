@@ -1,4 +1,4 @@
-from utils.utils import get_model
+from core.models import get_model
 
 def create_chat(user_question, retriever):
     template = """

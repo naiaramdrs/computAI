@@ -1,6 +1,6 @@
-from langchain.text_splitter import RecursiveCharacterTextSplitter # Utilizado para separar o texto em chunks
+from core.models import get_model
 from langchain.schema import Document
-from utils.utils import get_model
+from langchain.text_splitter import RecursiveCharacterTextSplitter # Utilizado para separar o texto em chunks
 
 def string_transform(data):
     text = ""
