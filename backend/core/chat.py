@@ -1,12 +1,4 @@
-import google.generativeai as genai
-from langchain_core.prompts import ChatPromptTemplate
-from dotenv import load_dotenv
-import os
-
-def get_model():
-    genai.configure(api_key=os.getenv("API_KEY_GEMINI"))
-    model = genai.GenerativeModel('gemini-1.5-flash')
-    return model 
+from core.models import get_model
 
 def create_chat(user_question, retriever):
     template = """
@@ -24,9 +16,7 @@ def create_chat(user_question, retriever):
     info_text = "\n\n".join([doc.page_content for doc in info_docs])
     
     model = get_model()
-    
-    prompt_text = template.format(info_docs=info_text, user_question=user_question)
-    
-    response = model.generate_content(prompt_text)
+    prompt = template.format(info_docs=info_text, user_question=user_question)
+    response = model.generate_content(prompt)
     
     return response.text

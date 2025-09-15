@@ -2,7 +2,7 @@ from langchain_chroma import Chroma
 
 def get_vector_store(embeddings):
     vector_store = Chroma(
-        collection_name="my-collection",
+        collection_name="klebia",
         embedding_function=embeddings,
         persist_directory="./data/chroma_db"
     )
@@ -15,7 +15,7 @@ def get_retriever(vector_store):
     )
     return retriever
 
-def add_vector_database(documents, ids, vector_store):
+def add_documents(documents, ids, vector_store):
     try:         
         vector_store.add_documents(
             ids=ids,
