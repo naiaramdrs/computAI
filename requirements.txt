@@ -1,0 +1,9 @@
+flask
+pandas
+langchain
+langchain_community
+chromadb
+sentence_transformers
+langchain_huggingface
+langchain_chroma
+google.generativeai
