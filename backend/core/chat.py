@@ -1,6 +1,6 @@
 from core.models import get_model
 
-def create_chat(user_question, retriever):
+def get_answer(user_question, retriever, chat_id):
     template = """
     Você é uma assistente virtual que atende os usuários de Ciência da Computação. 
     Você tem acesso às seguintes informações do curso da UFCG:

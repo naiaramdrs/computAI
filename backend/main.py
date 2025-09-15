@@ -3,7 +3,7 @@ from dotenv import load_dotenv
 from core.models import get_embeddings_model
 from core.pre_processing import string_transform, create_chunks
 from core.vector_store import get_vector_store, get_retriever, add_documents
-from core.chat import create_chat
+from core.chat import get_answer
 
 load_dotenv()
 
@@ -19,4 +19,4 @@ retriever = get_retriever(vector_store)
 # documents, ids = create_chunks(text)
 # add_documents(documents, ids, vector_store)
 
-print(create_chat("Como é o curso de computacao?", retriever))
+print(get_answer("Como é o curso de computacao?", retriever))
