@@ -1,4 +1,5 @@
 flask
+flask_cors
 pandas
 langchain
 langchain_community
