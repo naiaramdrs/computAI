@@ -28,12 +28,9 @@ def create_propositions(chunks):
     Uma lista de proposições organizadas e não redundantes, que representem de forma fiel e condensada o conteúdo do chunk.
     """
     for chunk in chunks:
-        print(f"CHUNK: {chunk}")
         prompt = template.format(chunk=chunk)
         response = model.generate_content(prompt)
         propositions.append(response.text)
-        
-        print(f"PROPOSITION: {response.text}")
 
     return propositions
 
