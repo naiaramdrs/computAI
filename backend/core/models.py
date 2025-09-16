@@ -1,6 +1,7 @@
 import os
 import google.generativeai as genai
-from langchain_huggingface import HuggingFaceEmbeddings
+from core.embeddings import GeminiEmbeddingFunction
+
 
 def get_model():
     genai.configure(api_key=os.getenv("API_KEY_GEMINI"))
@@ -8,4 +9,5 @@ def get_model():
     return model
 
 def get_embeddings_model():
-    return HuggingFaceEmbeddings(model_name="sentence-transformers/all-MiniLM-L6-v2")
+    return GeminiEmbeddingFunction()
+

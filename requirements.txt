@@ -7,3 +7,4 @@ sentence_transformers
 langchain_huggingface
 langchain_chroma
 google.generativeai
+google.genai

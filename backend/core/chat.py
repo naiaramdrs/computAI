@@ -38,6 +38,7 @@ def get_answer(user_question, retriever, chat_id):
     """
 
     info_docs = retriever.invoke(user_question)
+    print("retriever", info_docs)
     info_text = "\n\n".join([doc.page_content for doc in info_docs])
     
     history = get_chat_history(chat_id)
