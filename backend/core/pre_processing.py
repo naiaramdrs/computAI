@@ -27,6 +27,7 @@ def create_propositions(chunks):
     Saída esperada:
     Uma lista de proposições organizadas e não redundantes, que representem de forma fiel e condensada o conteúdo do chunk.
     """
+
     for chunk in chunks:
         prompt = template.format(chunk=chunk)
         response = model.generate_content(prompt)
@@ -41,7 +42,7 @@ def create_chunks(text):
         chunk_overlap = 300, ## Quantidade de caracteres que o nosso chunk vai pegar do próximo chunk para que a frase não fique sem sentido
         length_function = len
     )
-    
+
     chunks = text_splitter.split_text(text)
     propositions = create_propositions(chunks)
     documents = []

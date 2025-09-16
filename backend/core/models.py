@@ -9,4 +9,3 @@ def get_model():
 
 def get_embeddings_model():
     return GeminiEmbeddings()
-
