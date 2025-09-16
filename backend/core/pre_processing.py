@@ -27,15 +27,17 @@ def create_propositions(chunks):
     Saída esperada:
     Uma lista de proposições organizadas e não redundantes, que representem de forma fiel e condensada o conteúdo do chunk.
     """
-    
+    count = 0
     for chunk in chunks:
+        if count > 3:
+            break
         print(f"CHUNK: {chunk}")
-
         prompt = template.format(chunk=chunk)
         response = model.generate_content(prompt)
         propositions.append(response.text)
         
         print(f"PROPOSITION: {response.text}")
+        count += 1
 
     return propositions
 

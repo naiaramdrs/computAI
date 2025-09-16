@@ -15,8 +15,8 @@ vector_store = get_vector_store(embeddings)
 retriever = get_retriever(vector_store)
 
 ## Essa parte vamos rodar apenas uma vez, no momento de adicionar os dados no vector database
-# text = string_transform(data_sites) + string_transform(data_pdf)
-# documents, ids = create_chunks(text)
-# add_documents(documents, ids, vector_store)
+text = string_transform(data_sites) + string_transform(data_pdf)
+documents, ids = create_chunks(text)
+add_documents(documents, ids, vector_store)
 
 print(get_answer("Como é o curso de computacao da ufcg?", retriever, 1))

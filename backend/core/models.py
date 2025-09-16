@@ -1,6 +1,6 @@
 import os
 import google.generativeai as genai
-from core.embeddings import GeminiEmbeddingFunction
+from core.embeddings import GeminiEmbeddings
 
 
 def get_model():
@@ -9,5 +9,5 @@ def get_model():
     return model
 
 def get_embeddings_model():
-    return GeminiEmbeddingFunction()
+    return GeminiEmbeddings()
 
