@@ -14,21 +14,24 @@ class _MainPageState extends State<MainPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Theme.of(context).scaffoldBackgroundColor,
-      body: WelcomePage(),
-      bottomNavigationBar: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: InputField(
-          onSend: (value) {
-            setState(() {
-              value;
-            });
-            Navigator.of(context).push(
-              MaterialPageRoute(
-                builder: (context) => ChatPage(submittedText: value),
-              ),
-            );
-          },
-        ),
+      body: Column(
+        children: [
+          Expanded(child: WelcomePage()),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: InputField(
+              onSend: (text) {
+                if (text.isNotEmpty) {
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (context) => ChatPage(submittedText: text),
+                    ),
+                  );
+                }
+              },
+            ),
+          ),
+        ],
       ),
     );
   }
@@ -44,7 +47,11 @@ class WelcomePage extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Image.asset('images/logo_sem_fundo.png', width: 200, height: 200),
+          Image.asset(
+            'assets/images/logo_sem_fundo.png',
+            width: 200,
+            height: 200,
+          ),
           Text(
             'Sua assistente virtual de\nComputação@UFCG',
             style: style,

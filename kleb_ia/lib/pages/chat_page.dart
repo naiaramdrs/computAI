@@ -1,7 +1,8 @@
-import 'package:flutter_chat_bubble/chat_bubble.dart';
 import 'package:kleb_ia/services/chat_service.dart';
+import 'package:kleb_ia/widgets/input_field.dart';
+import 'package:kleb_ia/widgets/top_bar.dart';
+import 'package:kleb_ia/widgets/bubblet.dart';
 import 'package:flutter/material.dart';
-import 'main_page.dart';
 
 class ChatPage extends StatefulWidget {
   final String submittedText;
@@ -13,87 +14,105 @@ class ChatPage extends StatefulWidget {
 }
 
 class _ChatPageState extends State<ChatPage> {
-  late Future<String?> _answerFuture;
+  late Future<ChatResponse> _answerFuture;
+  final List<Message> _messages = [];
+  String? _chatId;
 
   @override
   void initState() {
     super.initState();
-    _answerFuture = sendQuestion(widget.submittedText);
+    _addMessage(widget.submittedText, true);
+    _answerFuture = createChat(widget.submittedText);
+    _answerFuture.then((answer) {
+      _chatId = answer.chatId;
+      _addMessage(answer.message, false);
+    });
+  }
+
+  @override
+  void didUpdateWidget(covariant ChatPage oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (widget.submittedText != oldWidget.submittedText) {
+      _addMessage(widget.submittedText, true);
+      _answerFuture = sendQuestionToChat(_chatId!, widget.submittedText);
+      setState(() {});
+      _answerFuture.then((answer) {
+        _addMessage(answer.message, false);
+      });
+    }
+  }
+
+  void _addMessage(String text, bool isUser) {
+    setState(() {
+      _messages.add(Message(text: text, isUser: isUser));
+    });
   }
 
   @override
   Widget build(BuildContext context) {
+    Widget builder(context, snapshot) {
+      if (snapshot.connectionState == ConnectionState.waiting) {
+        return const Align(
+          alignment: Alignment.centerLeft,
+          child: Padding(
+            padding: EdgeInsets.all(12.0),
+            child: SizedBox(
+              width: 20,
+              height: 20,
+              child: CircularProgressIndicator(
+                strokeWidth: 2,
+                color: Colors.grey,
+              ),
+            ),
+          ),
+        );
+      } else if (snapshot.hasError || !snapshot.hasData) {
+        return _buildAnswerBubble(
+          'Não foi possível obter uma resposta. Tente novamente.',
+        );
+      } else {
+        return const SizedBox.shrink();
+      }
+    }
+
     return Scaffold(
       backgroundColor: Theme.of(context).scaffoldBackgroundColor,
-      appBar: AppBar(
-        backgroundColor: const Color.fromARGB(255, 109, 160, 238),
-        leading: Image.asset('images/logo_sem_fundo.png'),
-        actions: [
-          IconButton(
-            icon: const Icon(Icons.home, color: Colors.white),
-            onPressed: () {
-              Navigator.of(context).pushReplacement(
-                MaterialPageRoute(builder: (context) => const MainPage()),
-              );
-            },
-          ),
-        ],
-      ),
-      body: SingleChildScrollView(
+      appBar: TopBar(),
+      body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            // Mensagem enviada pelo usuário
-            Align(
-              alignment: Alignment.centerRight,
-              child: ChatBubble(
-                clipper: ChatBubbleClipper5(type: BubbleType.sendBubble),
-                alignment: Alignment.topRight,
-                margin: const EdgeInsets.only(top: 20),
-                backGroundColor: Colors.black,
-                child: Container(
-                  constraints: BoxConstraints(
-                    maxWidth: MediaQuery.of(context).size.width * 0.7,
-                  ),
-                  child: Text(
-                    widget.submittedText,
-                    style: const TextStyle(
-                      color: Colors.white,
-                      fontSize: 16,
-                      decoration: TextDecoration.none,
-                      fontWeight: FontWeight.normal,
+            Expanded(
+              child: ListView(
+                children: [
+                  ..._messages.map(
+                    (msg) => Align(
+                      alignment: msg.isUser
+                          ? Alignment.centerRight
+                          : Alignment.centerLeft,
+                      child: msg.isUser
+                          ? UserSpeechBubble(widget: widget)
+                          : BotSpeechBubble(context: context, text: msg.text),
                     ),
                   ),
-                ),
+                  const SizedBox(height: 20),
+                  FutureBuilder<ChatResponse>(
+                    future: _answerFuture,
+                    builder: builder,
+                  ),
+                ],
               ),
             ),
-
-            // Resposta da API
-            const SizedBox(height: 20),
-            FutureBuilder<String?>(
-              future: _answerFuture,
-              builder: (context, snapshot) {
-                if (snapshot.connectionState == ConnectionState.waiting) {
-                  return const Align(
-                    alignment: Alignment.centerLeft,
-                    child: Padding(
-                      padding: EdgeInsets.all(12.0),
-                      child: SizedBox(
-                        width: 20,
-                        height: 20,
-                        child: CircularProgressIndicator(
-                          strokeWidth: 2,
-                          color: Colors.grey,
-                        ),
-                      ),
-                    ),
-                  );
-                } else if (snapshot.hasError) {
-                  return _buildAnswerBubble('Erro: ${snapshot.error}');
-                } else {
-                  final answer = snapshot.data ?? 'Sem resposta disponível';
-                  return _buildAnswerBubble(answer);
+            InputField(
+              onSend: (text) {
+                if (text.isNotEmpty) {
+                  _addMessage(text, true);
+                  _answerFuture = createChat(text);
+                  setState(() {});
+                  _answerFuture.then((answer) {
+                    _addMessage(answer.message, false);
+                  });
                 }
               },
             ),
@@ -106,25 +125,14 @@ class _ChatPageState extends State<ChatPage> {
   Widget _buildAnswerBubble(String text) {
     return Align(
       alignment: Alignment.centerLeft,
-      child: ChatBubble(
-        clipper: ChatBubbleClipper5(type: BubbleType.receiverBubble),
-        backGroundColor: Colors.white,
-        margin: const EdgeInsets.only(top: 20),
-        child: Container(
-          constraints: BoxConstraints(
-            maxWidth: MediaQuery.of(context).size.width * 0.7,
-          ),
-          child: Text(
-            text,
-            style: const TextStyle(
-              color: Colors.black,
-              fontSize: 16,
-              decoration: TextDecoration.none,
-              fontWeight: FontWeight.normal,
-            ),
-          ),
-        ),
-      ),
+      child: BotSpeechBubble(context: context, text: text),
     );
   }
+}
+
+class Message {
+  final String text;
+  final bool isUser;
+
+  Message({required this.text, required this.isUser});
 }

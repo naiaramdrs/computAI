@@ -21,11 +21,8 @@ class _InputFieldState extends State<InputField> {
           ),
           suffixIcon: SendButton(
             onSend: () {
-              final text = _controller.text.trim();
-              if (text.isNotEmpty) {
-                widget.onSend(text);
-                _controller.clear();
-              }
+              widget.onSend(_controller.text.trim());
+              _controller.clear();
             },
           ),
           focusedBorder: OutlineInputBorder(
