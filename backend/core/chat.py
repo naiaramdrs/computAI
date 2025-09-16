@@ -1,5 +1,5 @@
-from core.models import get_model
 import sqlite3
+from core.models import get_model
 
 def add_chat_history(chat_id, user_question, chat_answer):
     conn = sqlite3.connect("./data/sqlite.db")
