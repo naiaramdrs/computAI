@@ -19,4 +19,4 @@ retriever = get_retriever(vector_store)
 # documents, ids = create_chunks(text)
 # add_documents(documents, ids, vector_store)
 
-print(get_answer("Como é o curso de computacao fora da ufcg?", retriever, 1))
+print(get_answer("quais sao os docentes do curso?", retriever, 2))
