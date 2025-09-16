@@ -2,7 +2,6 @@ import os
 import google.generativeai as genai
 from langchain_core.embeddings import Embeddings
 
-
 class GeminiEmbeddings(Embeddings):
     def __init__(self):
         genai.configure(api_key=os.getenv("API_KEY_GEMINI"))

@@ -36,6 +36,9 @@ def get_answer(user_question, retriever, chat_id):
     Instruções:
     1. Analise a pergunta do estudante levando em conta o histórico da conversa (se houver).
     2. Utilize as informações do curso da UFCG fornecidas na documentação como fonte prioritária.
+    3. Não mencione o uso de uma documentação, haja e demonstre ao usuário como se você tivesse toda a informação fornecida.
+    4. Não dê respostas muito longas, tente sempre ser breve e educado com respostas contendo no máximo 2 parágrafos.
+    5. Não invente, se a documentação não for suficiente para responder a solicitação do usuário, apenas diga que ainda não possui a informação mas em breve será atualizado e poderá responder melhor.
 
     Responda de forma:
     1. Clara e concisa, evitando jargões desnecessários.
@@ -48,7 +51,6 @@ def get_answer(user_question, retriever, chat_id):
     """
 
     info_docs = retriever.invoke(user_question)
-    print("retriever", info_docs)
     info_text = "\n\n".join([doc.page_content for doc in info_docs])
     history = get_chat_history(chat_id)
     
