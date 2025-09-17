@@ -10,10 +10,12 @@ class BotSpeechBubble extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Color backColor = Colors.grey.shade300;
+    
     return ChatBubble(
       clipper: ChatBubbleClipper5(type: BubbleType.receiverBubble),
-      backGroundColor: Colors.grey.shade300,
-      shadowColor: Colors.grey.shade300,
+      backGroundColor: backColor,
+      shadowColor: backColor,
       margin: const EdgeInsets.only(top: 20),
       child: Container(
         constraints: BoxConstraints(
@@ -22,8 +24,8 @@ class BotSpeechBubble extends StatelessWidget {
         child: MarkdownBody(
           data: text,
           styleSheet: MarkdownStyleSheet(
-            p: const TextStyle(
-              color: Colors.black,
+            p: TextStyle(
+              color: Theme.of(context).textTheme.titleSmall!.color,
               fontSize: 16,
               decoration: TextDecoration.none,
               fontWeight: FontWeight.normal,
@@ -47,12 +49,16 @@ class UserSpeechBubble extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Color backColor = Colors.indigo.shade400;
+    Color shadowColor = Colors.grey.shade400;
+    Color textColor = Colors.white;
+
     return ChatBubble(
       clipper: ChatBubbleClipper5(type: BubbleType.sendBubble),
       alignment: Alignment.topRight,
       margin: const EdgeInsets.only(top: 20),
-      backGroundColor: Colors.indigo.shade400,
-      shadowColor: Colors.grey.shade400,
+      backGroundColor: backColor,
+      shadowColor: shadowColor,
       child: Container(
         constraints: BoxConstraints(
           maxWidth: MediaQuery.of(context).size.width * 0.7,
@@ -60,8 +66,8 @@ class UserSpeechBubble extends StatelessWidget {
         child: MarkdownBody(
           data: text,
           styleSheet: MarkdownStyleSheet(
-            p: const TextStyle(
-              color: Colors.white,
+            p: TextStyle(
+              color: textColor,
               fontSize: 16,
               decoration: TextDecoration.none,
               fontWeight: FontWeight.normal,

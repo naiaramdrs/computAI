@@ -6,17 +6,20 @@ class _InputFieldState extends State<InputField> {
   
   @override
   Widget build(BuildContext context) {
+    Color blackColor = Colors.black87;
+    Color greyColor = Colors.grey.shade400;
+
     return Padding(
       padding: const EdgeInsets.only(left: 8.0, right: 8.0, bottom: 14.0),
       child: TextField(
         controller: _controller,
-        style: TextStyle(color: Colors.grey[400]),
+        style: TextStyle(color: greyColor),
         decoration: InputDecoration(
           filled: true,
-          fillColor: Colors.black87,
+          fillColor: blackColor,
           border: const OutlineInputBorder(),
             hintText: 'Digite sua dúvida aqui',
-            hintStyle: TextStyle(color: Colors.grey[400]),
+            hintStyle: TextStyle(color: greyColor),
           contentPadding: const EdgeInsets.symmetric(
             vertical: 18.0,
             horizontal: 16.0,
@@ -29,11 +32,11 @@ class _InputFieldState extends State<InputField> {
           ),
           focusedBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(15.0),
-            borderSide: BorderSide(color: Colors.black87),
+            borderSide: BorderSide(color: blackColor),
           ),
           enabledBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(15.0),
-            borderSide: BorderSide(color: Colors.black87),
+            borderSide: BorderSide(color: blackColor),
           ),
         ),
       ),

@@ -7,9 +7,11 @@ class SendButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Color color = Colors.grey.shade400;
+    
     return IconButton(
       icon: const Icon(Icons.arrow_circle_up),
-      color: Colors.grey.shade500,
+      color: color,
       onPressed: onSend,
     );
   }

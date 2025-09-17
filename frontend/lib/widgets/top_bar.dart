@@ -10,9 +10,9 @@ class TopBar extends StatelessWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      backgroundColor: Colors.indigo.shade400,
-      automaticallyImplyLeading: false, // remove seta de back
-      centerTitle: true, // centraliza a logo
+      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+      automaticallyImplyLeading: false,
+      centerTitle: true,
       title: InkWell(
         onTap: () {
           Navigator.of(context).pushReplacement(
