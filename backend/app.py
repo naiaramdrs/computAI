@@ -27,5 +27,7 @@ def send_question(chat_id):
     answer = get_answer(data.get('question'), retriever, chat_id)
     return jsonify({"message": "Prompt enviado com sucesso!", "answer": answer}), 201
 
+app.register_blueprint(bp)
+
 if __name__ == "__main__":
     app.run(debug=True)
