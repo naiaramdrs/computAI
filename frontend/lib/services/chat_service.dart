@@ -1,3 +1,4 @@
+import 'package:klebia/configuration/config.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
@@ -19,7 +20,8 @@ class ChatResponse {
 
 Future<ChatResponse> createChat(String question) async {
   try {
-    final url = Uri.parse('http://127.0.0.1:5000/klebia/chat');
+    final String hostPort = Config.apiBaseUrl;
+    final url = Uri.parse('$hostPort/klebia/chat');
 
     final response = await http.post(
       url,
@@ -40,7 +42,8 @@ Future<ChatResponse> createChat(String question) async {
 
 Future<ChatResponse> sendQuestionToChat(String chatId, String question) async {
   try {
-    final url = Uri.parse('http://127.0.0.1:5000/klebia/chat/$chatId/question');
+    final String hostPort = Config.apiBaseUrl;
+    final url = Uri.parse('$hostPort/klebia/chat/$chatId/question');
 
     final response = await http.post(
       url,
