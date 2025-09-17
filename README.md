@@ -8,6 +8,22 @@ pip install -r requirements.txt
 
 ## Execução
 
+### Frontend
+
 ```bash
-python3 main.py
+cd frontend
+```
+
+```bash
+flutter run
+```
+
+### Backend
+
+```bash
+cd backend
+```
+
+```bash
+python3 app.py
 ```
