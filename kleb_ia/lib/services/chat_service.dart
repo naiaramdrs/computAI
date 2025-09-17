@@ -19,7 +19,7 @@ class ChatResponse {
 
 Future<ChatResponse> createChat(String question) async {
   try {
-    final url = Uri.parse('http://127.0.0.1:5000/chat');
+    final url = Uri.parse('http://127.0.0.1:5000/klebia/chat');
 
     final response = await http.post(
       url,
@@ -40,7 +40,7 @@ Future<ChatResponse> createChat(String question) async {
 
 Future<ChatResponse> sendQuestionToChat(String chatId, String question) async {
   try {
-    final url = Uri.parse('http://http://127.0.0.1:5000/chat/$chatId/question');
+    final url = Uri.parse('http://127.0.0.1:5000/klebia/chat/$chatId/question');
 
     final response = await http.post(
       url,

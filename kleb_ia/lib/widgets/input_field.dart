@@ -3,18 +3,20 @@ import 'package:flutter/material.dart';
 
 class _InputFieldState extends State<InputField> {
   final TextEditingController _controller = TextEditingController();
-
+  
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(left: 4.0, right: 4.0, bottom: 14.0),
+      padding: const EdgeInsets.only(left: 8.0, right: 8.0, bottom: 14.0),
       child: TextField(
         controller: _controller,
+        style: TextStyle(color: Colors.grey[400]),
         decoration: InputDecoration(
           filled: true,
-          fillColor: Colors.white,
+          fillColor: Colors.black87,
           border: const OutlineInputBorder(),
-          hintText: 'Digite sua dúvida aqui',
+            hintText: 'Digite sua dúvida aqui',
+            hintStyle: TextStyle(color: Colors.grey[400]),
           contentPadding: const EdgeInsets.symmetric(
             vertical: 18.0,
             horizontal: 16.0,
@@ -27,11 +29,11 @@ class _InputFieldState extends State<InputField> {
           ),
           focusedBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(15.0),
-            borderSide: BorderSide(color: Colors.grey.shade400),
+            borderSide: BorderSide(color: Colors.black87),
           ),
           enabledBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(15.0),
-            borderSide: BorderSide(color: Colors.grey.shade400),
+            borderSide: BorderSide(color: Colors.black87),
           ),
         ),
       ),

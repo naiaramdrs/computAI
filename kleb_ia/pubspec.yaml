@@ -13,6 +13,7 @@ dependencies:
     sdk: flutter
   
   flutter_chat_bubble: 2.0.2
+  flutter_markdown: ^0.7.0
   cupertino_icons: ^1.0.8
   english_words: ^4.0.0
   provider: ^6.1.5
@@ -28,4 +29,5 @@ flutter:
 
   uses-material-design: true
   assets:
-    - assets/images/logo_sem_fundo.png
+    - assets/images/logo_preta.png
+    - assets/images/logo_horizontal.png

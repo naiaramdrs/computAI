@@ -23,21 +23,19 @@ class _ChatPageState extends State<ChatPage> {
     super.initState();
     _addMessage(widget.submittedText, true);
     _answerFuture = createChat(widget.submittedText);
-    _answerFuture.then((answer) {
-      _chatId = answer.chatId;
-      _addMessage(answer.message, false);
+    _answerFuture.then((response) {
+      _chatId = response.chatId;
+      _addMessage(response.answer, false);
     });
   }
 
-  @override
-  void didUpdateWidget(covariant ChatPage oldWidget) {
-    super.didUpdateWidget(oldWidget);
-    if (widget.submittedText != oldWidget.submittedText) {
-      _addMessage(widget.submittedText, true);
-      _answerFuture = sendQuestionToChat(_chatId!, widget.submittedText);
+  void _handleSubmittedText(String text) {
+    if (text.isNotEmpty) {
+      _addMessage(text, true);
+      _answerFuture = sendQuestionToChat(_chatId!, text);
       setState(() {});
-      _answerFuture.then((answer) {
-        _addMessage(answer.message, false);
+      _answerFuture.then((response) {
+        _addMessage(response.answer, false);
       });
     }
   }
@@ -76,7 +74,7 @@ class _ChatPageState extends State<ChatPage> {
     }
 
     return Scaffold(
-      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+      backgroundColor: Colors.grey.shade200,
       appBar: TopBar(),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -92,7 +90,7 @@ class _ChatPageState extends State<ChatPage> {
                           ? Alignment.centerRight
                           : Alignment.centerLeft,
                       child: msg.isUser
-                          ? UserSpeechBubble(widget: widget)
+                          ? UserSpeechBubble(context: context, text: msg.text)
                           : BotSpeechBubble(context: context, text: msg.text),
                     ),
                   ),
@@ -104,20 +102,13 @@ class _ChatPageState extends State<ChatPage> {
                 ],
               ),
             ),
-            InputField(
-              onSend: (text) {
-                if (text.isNotEmpty) {
-                  _addMessage(text, true);
-                  _answerFuture = createChat(text);
-                  setState(() {});
-                  _answerFuture.then((answer) {
-                    _addMessage(answer.message, false);
-                  });
-                }
-              },
-            ),
           ],
         ),
+      ),
+      bottomNavigationBar: InputField(
+        onSend: (text) {
+          _handleSubmittedText(text);
+        },
       ),
     );
   }
