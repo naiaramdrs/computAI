@@ -62,7 +62,7 @@ class WelcomePage extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Image.asset('assets/images/logo_preta.png', width: 200, height: 200),
+          Image.asset('assets/images/logo_vertical.png', width: 200, height: 200),
           Text(
             'Sua assistente virtual de\nComputação@UFCG',
             style: style,
