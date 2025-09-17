@@ -1,6 +1,6 @@
+import 'package:flutter_markdown/flutter_markdown.dart';
 import 'package:flutter_chat_bubble/chat_bubble.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_markdown/flutter_markdown.dart';
 
 class BotSpeechBubble extends StatelessWidget {
   const BotSpeechBubble({super.key, required this.context, required this.text});
@@ -68,15 +68,6 @@ class UserSpeechBubble extends StatelessWidget {
             ),
           ),
         ),
-        // child: Text(
-        //   text,
-        //   style: const TextStyle(
-        //     color: Colors.white,
-        //     fontSize: 16,
-        //     decoration: TextDecoration.none,
-        //     fontWeight: FontWeight.normal,
-        //   ),
-        // ),
       ),
     );
   }

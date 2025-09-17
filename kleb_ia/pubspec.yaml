@@ -29,5 +29,5 @@ flutter:
 
   uses-material-design: true
   assets:
-    - assets/images/logo_preta.png
     - assets/images/logo_horizontal.png
+    - assets/images/logo_vertical.png
