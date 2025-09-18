@@ -6,7 +6,7 @@ from core.vector_store import get_vector_store, get_retriever
 from core.chat import get_answer
 
 app = Flask(__name__)
-CORS(app)
+CORS(app, resources={r"/klebia/*": {"origins": "*"}})
 
 embeddings = get_embeddings_model()
 vector_store = get_vector_store(embeddings)
@@ -30,4 +30,4 @@ def send_question(chat_id):
 app.register_blueprint(bp)
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(debug=True, port=8080)

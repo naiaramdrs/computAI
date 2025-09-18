@@ -1,27 +1,33 @@
-import sqlite3
+import os
 from core.models import get_model
+from supabase import create_client, Client
 
 def add_chat_history(chat_id, user_question, chat_answer):
-    conn = sqlite3.connect("./data/sqlite.db")
-    cursor = conn.cursor()
-    
-    cursor.execute("""
-        INSERT INTO chat_history (chat_id, user_question, chat_answer)
-        VALUES (?, ?, ?)
-    """, (chat_id, user_question, chat_answer))
-    
-    conn.commit()
-    conn.close()
-    
+    url = get_url_supabase()
+    key = get_key_supabase()
+    supabase = get_client_supabase(url, key)
+
+    data = {
+        "chat_id": chat_id,
+        "user_question": user_question,
+        "chat_answer": chat_answer
+    }
+    response = supabase.table("chat_history").insert(data).execute()
+    if response.data is None:
+        raise Exception(f"Erro ao inserir no Supabase: {response.data}")
+    return response.data
+
 def get_chat_history(chat_id):
-    conn = sqlite3.connect("./data/sqlite.db")
-    cursor = conn.cursor()
+    url = get_url_supabase()
+    key = get_key_supabase()
+    supabase = get_client_supabase(url, key)
     
-    cursor.execute("SELECT user_question, chat_answer FROM chat_history WHERE chat_id=?", (chat_id,))
-    rows = cursor.fetchall()
-    
-    conn.close()
-    return rows
+    response = supabase.table("chat_history").select("user_question, chat_answer").eq("chat_id", chat_id).execute()
+    if response.data is None:
+        raise Exception(f"Erro ao buscar histórico: {response.data}")
+    rows = response.data
+    return [(row["user_question"], row["chat_answer"]) for row in rows]
+
 
 def get_answer(user_question, retriever, chat_id):
     template = """
@@ -59,3 +65,13 @@ def get_answer(user_question, retriever, chat_id):
     add_chat_history(chat_id, user_question, response.text)
     
     return response.text
+
+def get_url_supabase():
+    return os.getenv("SUPABASE_URL")
+
+def get_key_supabase():
+    return os.getenv("SUPABASE_KEY")
+
+def get_client_supabase(url, key):
+    supabase: Client = create_client(url, key)
+    return supabase
