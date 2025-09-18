@@ -6,7 +6,7 @@ class Config {
     if (developmentMode) {
       return 'http://127.0.0.1:5000';
     } else {
-      return 'https://meu-backend-na-cloud.run.app';
+      return 'https://backend-233150177113.southamerica-east1.run.app';
     }
   }
 }
