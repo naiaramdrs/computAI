@@ -19,4 +19,4 @@ retriever = get_retriever(vector_store)
 # documents, ids = create_chunks(text)
 # add_documents(documents, ids, vector_store)
 
-print(get_answer("Dalton é professor de quais disciplinas?", retriever, 3))
+print(get_answer("Quais as disciplinas do periodo 4?", retriever, 1))
