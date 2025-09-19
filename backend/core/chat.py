@@ -28,7 +28,6 @@ def get_chat_history(chat_id):
     rows = response.data
     return [(row["user_question"], row["chat_answer"]) for row in rows]
 
-
 def get_answer(user_question, retriever, chat_id):
     template = """
     Você é uma assistente virtual especializada em atender estudantes e servidores do curso de Ciência da Computação da UFCG. Seu objetivo é fornecer respostas precisas, claras, úteis e educadas sobre qualquer informação relacionada ao curso.
