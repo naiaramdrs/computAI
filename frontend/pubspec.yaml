@@ -1,7 +1,7 @@
 name: klebia
 description: "A assistente virtual de Computação@UFCG"
 
-publish_to: 'none' # Remove this line if you wish to publish to pub.dev
+publish_to: 'none'
 
 version: 1.0.0+1
 
@@ -23,11 +23,17 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
   flutter_lints: ^5.0.0
+  flutter_launcher_icons: ^0.14.4
 
-# The following section is specific to Flutter packages.
 flutter:
 
   uses-material-design: true
   assets:
     - assets/images/logo_horizontal.png
     - assets/images/logo_vertical.png
+
+flutter_launcher_icons:
+  android: true
+  ios: true
+  remove_alpha_ios: true
+  image_path: "assets/images/logo_apk.png"

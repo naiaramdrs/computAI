@@ -32,7 +32,7 @@ class _ChatPageState extends State<ChatPage> {
   void _handleSubmittedText(String text) {
     if (text.isNotEmpty) {
       _addMessage(text, true);
-      _answerFuture = sendQuestionToChat(_chatId!, text);
+      _answerFuture = sendQuestionToChat(_chatId ?? '', text);
       setState(() {});
       _answerFuture.then((response) {
         _addMessage(response.answer, false);
@@ -105,10 +105,16 @@ class _ChatPageState extends State<ChatPage> {
           ],
         ),
       ),
-      bottomNavigationBar: InputField(
-        onSend: (text) {
-          _handleSubmittedText(text);
-        },
+      resizeToAvoidBottomInset: true,
+      bottomNavigationBar: Padding(
+        padding: EdgeInsets.only(
+          bottom: MediaQuery.of(context).viewInsets.bottom,
+        ),
+        child: InputField(
+          onSend: (text) {
+        _handleSubmittedText(text);
+          },
+        ),
       ),
     );
   }
