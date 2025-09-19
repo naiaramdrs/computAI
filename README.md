@@ -3,10 +3,10 @@
 ## Instalação
 
 ```bash
-pip install -r requirements.txt
+pip install -r backend/requirements.txt
 ```
 
-## Execução
+## Execução Local
 
 ### Frontend
 

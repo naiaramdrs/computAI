@@ -1,0 +1,12 @@
+flask
+flask_cors
+pandas
+langchain
+langchain_community
+langchain_chroma
+chromadb
+google.generativeai
+google.genai
+gunicorn
+requests
+supabase
