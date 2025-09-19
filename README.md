@@ -12,9 +12,9 @@ Realize o download do APK aqui: [Klebia.apk](https://drive.google.com/file/d/1or
 
 Confira a demo do App aqui: [KlebIA - Vídeo demo](https://www.youtube.com/shorts/XDLqn0z2vzA)
 
-<img alt="Screenshot_20250918_225645" src="https://github.com/user-attachments/assets/5fc234ea-3a42-4cc3-96f8-32a456d31109" width="33%" />
-<img alt="Screenshot_20250918_225721" src="https://github.com/user-attachments/assets/98b41578-0613-427b-8141-c8b3643d6bf7" width="33%" />
-<img alt="Screenshot_20250918_230003" src="https://github.com/user-attachments/assets/51f7bacd-25ad-45c1-aff3-c6f2d085572b" width="33%" />
+<img alt="Screenshot_20250918_225645" src="https://github.com/user-attachments/assets/5fc234ea-3a42-4cc3-96f8-32a456d31109" width="30%" />
+<img alt="Screenshot_20250918_225721" src="https://github.com/user-attachments/assets/98b41578-0613-427b-8141-c8b3643d6bf7" width="30%" />
+<img alt="Screenshot_20250918_230003" src="https://github.com/user-attachments/assets/51f7bacd-25ad-45c1-aff3-c6f2d085572b" width="30%" />
 
 ## 💡 Principais Funcionalidades
 
