@@ -1,14 +1,34 @@
-# KlebIA
+# KlebIA 🤖
 
-KlebIA é uma assistente virtual projetada para centralizar o acesso às informações do curso de Ciência da Computação da UFCG, de forma que alunos e servidores possam obter informações e esclarecer dúvidas do curso de forma rápida, simples e eficiente. A aplicação combina Modelos de Linguagem de Grande Escala (LLMs) com técnicas de pré-processamento e Retrieval-Augmented Generation (RAG) para garantir a recuperação eficiente de dados extraídos de sites e documentos da Web.
+A KlebIA é uma assistente virtual desenvolvida para **centralizar o acesso às informações do curso de Ciência da Computação da UFCG**, permitindo que alunos e servidores esclareçam dúvidas sobre disciplinas, horários, regulamentos e demais informações institucionais de forma rápida, simples e eficiente.
 
-## Funcionalidades
+A aplicação integra **Modelos de Linguagem de Grande Escala (LLMs)** com **técnicas de pré-processamento** e **Retrieval-Augmented Generation (RAG)**, garantindo a recuperação ágil e precisa de dados provenientes de sites e documentos institucionais.
 
-- **Unificação de informações:** Reúne dados do curso de Ciência da Computação da UFCG em um único canal.
-- **Integração com LLMs:** Utiliza modelos de linguagem para compreender perguntas em linguagem natural.
-- **RAG (Retrieval-Augmented Generation):** Combina recuperação de informações relevantes com geração de respostas precisas.
+## 📥 Download do App
 
-## Tecnologias Utilizadas
+Realize o download do APK aqui: [Klebia.apk](https://drive.google.com/file/d/1orPOMH4gIWlQc2c5HoWXdM8D2ORq5b6l/view?usp=drive_link)
+
+## 🎬 Vídeo Demo
+
+Confira a demo do App aqui: [KlebIA - Vídeo demo](https://www.youtube.com/shorts/XDLqn0z2vzA)
+
+<img alt="Screenshot_20250918_225645" src="https://github.com/user-attachments/assets/5fc234ea-3a42-4cc3-96f8-32a456d31109" width="33%" />
+<img alt="Screenshot_20250918_225721" src="https://github.com/user-attachments/assets/98b41578-0613-427b-8141-c8b3643d6bf7" width="33%" />
+<img alt="Screenshot_20250918_230003" src="https://github.com/user-attachments/assets/51f7bacd-25ad-45c1-aff3-c6f2d085572b" width="33%" />
+
+## 💡 Principais Funcionalidades
+
+- **Chatbot interativo:** Oferece uma interface de conversa simples e intuitiva para tirar dúvidas de alunos e servidores.  
+- **Unificação de informações:** Reúne os dados do curso de Ciência da Computação da UFCG em um único canal.
+- **Integração com LLMs:** Interpreta perguntas em linguagem natural, oferecendo respostas claras e objetivas para o usuário.
+- **Pré-processamento inteligente:** Combina chunking e extração de proposições para organizar e estruturar melhor os dados antes da recuperação.
+- **RAG (Retrieval-Augmented Generation):** Recupera informações relevantes na base de dados e gera respostas mais completas e contextualizadas.
+
+## ⚙️ Arquitetura da Solução
+
+<img width="1788" height="780" alt="image" src="https://github.com/user-attachments/assets/cea2462b-80f3-4ba8-a83a-a618ea83e5b1" />
+
+## 🛠️ Tecnologias Utilizadas
 
 ### Frontend
 
@@ -28,15 +48,7 @@ KlebIA é uma assistente virtual projetada para centralizar o acesso às informa
 - **Modelo de Embedding**: gemini-embedding-001
 - **Modelo de Linguagem**: gemini-2.5-flash
 
-## Instalação ao App
-
-Link para download do aplicativo: [Klebia.apk](https://drive.google.com/file/d/1orPOMH4gIWlQc2c5HoWXdM8D2ORq5b6l/view?usp=drive_link)
-
-<img width="235" height="2400" alt="Screenshot_20250918_225645" src="https://github.com/user-attachments/assets/76f93e4c-301c-4348-b541-f16f078ea3dc" />
-<img width="235" height="2400" alt="Screenshot_20250918_225721" src="https://github.com/user-attachments/assets/b65a2de7-4571-49da-9171-c6efddde0dbf" />
-<img width="235" height="2400" alt="Screenshot_20250918_230003" src="https://github.com/user-attachments/assets/de981ffe-2f2c-4e7a-81e6-b23010e18daa" />
-
-## Execução Local
+## 🔬 Execução Local
 
 ### Frontend
 
@@ -73,7 +85,7 @@ pip install -r backend/requirements.txt
 python3 backend/app.py
 ```
 
-## Autoras
+## 👩‍💻 Autoras
 
 - Ana Rita Medeiros de Souza
 - Luisa Ledra de Azevedo
