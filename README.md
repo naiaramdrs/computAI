@@ -8,17 +8,6 @@ KlebIA é uma assistente virtual projetada para centralizar o acesso às informa
 - **Integração com LLMs:** Utiliza modelos de linguagem para compreender perguntas em linguagem natural.
 - **RAG (Retrieval-Augmented Generation):** Combina recuperação de informações relevantes com geração de respostas precisas.
 
-## Etapas de Desenvolvimento
-
-- **Coleta de dados e Web Scraping:** Extração dos dados de sites da Web, documentos e PDFs com informações relevantes sobre o curso para construir a base de dados.
-- **Pré-processamento nos dados:** Nessa etapa, os dados são segmentados em chunks, a partir dos quais são criadas proposições para facilitar a recuperação da informação.
-- **Geração de embeddings:** Conversão das proposições em vetores utililizando um modelo de Embedding. Os vetores são armazenados no banco de dados vetorial.
-- **Implementação do RAG:** Implementação do retrieval para recuperação da informação no banco de dados vetorial.
-- **Integração com LLMs:** Conexão do mecanismo de retrieval com o modelo de linguagem para gerar respostas em linguagem natural baseadas nas informações recuperadas.
-- **Desenvolvimento da interface:** Implementação da interface do App em Flutter.
-- **Testes e validação:** Testes de usabilidade realizados por diferentes usuários.
-- **Deploy e geração do APK:** Empacotamento da aplicação em containers usando Docker e disponibilização para uso real.
-
 ## Tecnologias Utilizadas
 
 ### Frontend
@@ -41,7 +30,7 @@ KlebIA é uma assistente virtual projetada para centralizar o acesso às informa
 
 ## Instalação ao App
 
-
+Link para download do APK: [Klebia.apk](https://drive.google.com/file/d/1orPOMH4gIWlQc2c5HoWXdM8D2ORq5b6l/view?usp=drive_link)
 
 <img width="235" height="2400" alt="Screenshot_20250918_225645" src="https://github.com/user-attachments/assets/76f93e4c-301c-4348-b541-f16f078ea3dc" />
 <img width="235" height="2400" alt="Screenshot_20250918_225721" src="https://github.com/user-attachments/assets/b65a2de7-4571-49da-9171-c6efddde0dbf" />
@@ -51,7 +40,7 @@ KlebIA é uma assistente virtual projetada para centralizar o acesso às informa
 
 ### Frontend
 
-1. Siga os passos deste tutorial para instalar o Flutter: [Install Flutter manually](https://docs.flutter.dev/install/manual).
+1. Siga os passos deste tutorial para instalar o Flutter: [Install Flutter manually](https://docs.flutter.dev/install/manual)
 2. Instale as extensões `Flutter` e `Dart` do VSCode.
 
 ```bash
@@ -84,7 +73,7 @@ pip install -r backend/requirements.txt
 python3 backend/app.py
 ```
 
-## Autores
+## Autoras
 
 - Ana Rita Medeiros de Souza
 - Luisa Ledra de Azevedo
